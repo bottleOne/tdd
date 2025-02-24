@@ -5,19 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class Money {
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Id @Column(name = "money_id")
-    private Long id;
+    public int amount;
 
-    private String classType;
-
-    private int ju;
-
-    private int price;
-
-    private int totalPrice;
+    public Money(int amount) {
+        this.amount = amount;
+    }
+    public Money times(int multiplier){
+        return new Money(this.amount * multiplier);
+    }
 }
