@@ -1,18 +1,13 @@
 package com.tdd.example.tdd.domain;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+public abstract class Money {
+    protected int amount;
 
-
-public class Money {
-    public int amount;
-
-    public Money(int amount) {
-        this.amount = amount;
+    public boolean equals(Object object) {
+        Money money = (Money) object;
+        return amount == money.amount &&
+                getClass().equals(money.getClass());
     }
-    public Money times(int multiplier){
-        return new Money(this.amount * multiplier);
-    }
+
+    public abstract Money times(int multiplier);
 }
