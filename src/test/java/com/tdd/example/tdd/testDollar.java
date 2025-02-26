@@ -2,6 +2,7 @@ package com.tdd.example.tdd;
 
 import com.tdd.example.tdd.domain.Dollar;
 import com.tdd.example.tdd.domain.Franc;
+import com.tdd.example.tdd.domain.Money;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -18,9 +19,9 @@ import static org.junit.jupiter.api.Assertions.*;
  * equals object
  * Dollar/Franc 중복
  * 공용 equal --해결
- * 공용 times
+ * 공용 times --해결
  * Dollar/Franc 비교 --해결
- * 통화
+ * 통화 ---해결
  */
 @SpringBootTest
 public class testDollar {
@@ -30,10 +31,9 @@ public class testDollar {
      */
     @Test
     public void testMultiaplication() {
-        Dollar dollar = new Dollar(5);
-        assertEquals(new Dollar(10) ,dollar.times(2));
-        assertEquals(new Dollar(15), dollar.times(3));
-
+        Money money = Money.dollar(5);
+        assertEquals(Money.dollar(10) ,money.times(2));
+        assertEquals(Money.dollar(15), money.times(3));
     }
 
     /**
@@ -41,21 +41,38 @@ public class testDollar {
      */
     @Test
     public void testFrancMultiaplication() {
-        Franc franc = new Franc(5);
-        assertEquals(new Franc(10) ,franc.times(2));
-        assertEquals(new Franc(15), franc.times(3));
+        Money franc = Money.franc(5);
+        assertEquals(Money.franc(10) ,franc.times(2));
+        assertEquals(Money.franc(15), franc.times(3));
 
     }
 
     /**
-     * EQUALS공통화
+     * EQUALS 공통화
      */
     @Test
     public void testEquals() {
-        assertTrue(new Dollar(10) .equals(new Dollar(10)));
-        assertFalse(new Dollar(10) .equals(new Dollar(11)));
-        assertTrue(new Franc(10) .equals(new Franc(10)));
-        assertFalse(new Franc(10) .equals(new Franc(11)));
-        assertFalse(new Franc(10) .equals(new Dollar(10)));
+        assertTrue(Money.dollar(10) .equals(Money.dollar(10)));
+        assertFalse(Money.dollar(10) .equals(Money.dollar(11)));
+        assertTrue(Money.franc(10) .equals(Money.franc(10)));
+        assertFalse(Money.franc(10) .equals(Money.franc(11)));
+        assertFalse(Money.franc(10) .equals(Money.dollar(10)));
+    }
+
+    /**
+     * 통화확인
+     */
+    @Test
+    public void testCurrency(){
+        assertEquals("USD", Money.dollar(1).currency());
+        assertEquals("CHF", Money.franc(1).currency());
+    }
+
+    /**
+     * times 상위로 공통화
+     */
+    @Test
+    public void testDifferentClassEquality(){
+        assertTrue(new Money(10,"USD").equals(new Franc(10, "USD")));
     }
 }
