@@ -1,8 +1,10 @@
 package com.tdd.example.tdd;
 
-import com.tdd.example.tdd.domain.Dollar;
-import com.tdd.example.tdd.domain.Franc;
+
+import com.tdd.example.tdd.domain.Bank;
 import com.tdd.example.tdd.domain.Money;
+import com.tdd.example.tdd.expresion.Expression;
+import com.tdd.example.tdd.expresion.Sum;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -54,25 +56,29 @@ public class testDollar {
     public void testEquals() {
         assertTrue(Money.dollar(10) .equals(Money.dollar(10)));
         assertFalse(Money.dollar(10) .equals(Money.dollar(11)));
-        assertTrue(Money.franc(10) .equals(Money.franc(10)));
-        assertFalse(Money.franc(10) .equals(Money.franc(11)));
         assertFalse(Money.franc(10) .equals(Money.dollar(10)));
     }
 
     /**
-     * 통화확인
+     * plus테스트
      */
     @Test
-    public void testCurrency(){
-        assertEquals("USD", Money.dollar(1).currency());
-        assertEquals("CHF", Money.franc(1).currency());
+    public void testSimpleAddition(){
+        Money five = Money.dollar(5);
+        Expression sum = five.plus(five);
+        Bank bank = new Bank();
+        Money reduced = bank.reduce(sum,"USD");
+       assertEquals(Money.dollar(10),reduced);
     }
 
     /**
-     * times 상위로 공통화
+     * sum테스트
      */
     @Test
-    public void testDifferentClassEquality(){
-        assertTrue(new Money(10,"USD").equals(new Franc(10, "USD")));
+    public void testReduceSum(){
+        Expression sum = new Sum(Money.dollar(3), Money.dollar(4));
+        Bank bank = new Bank();
+        Money result = bank.reduce(sum, "USD");
+        assertEquals(Money.dollar(7),result);
     }
 }
