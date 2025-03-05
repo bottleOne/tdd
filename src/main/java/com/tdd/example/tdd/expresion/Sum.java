@@ -1,5 +1,6 @@
 package com.tdd.example.tdd.expresion;
 
+import com.tdd.example.tdd.domain.Bank;
 import com.tdd.example.tdd.domain.Money;
 
 public class Sum implements Expression{
@@ -10,7 +11,7 @@ public class Sum implements Expression{
         this.addend = addend;
     }
 
-    public Money reduce(String to){
+    public Money reduce(Bank bank, String to){
         int amount = augend.amount + this.addend.amount;
         return new Money(amount, to);
     }
