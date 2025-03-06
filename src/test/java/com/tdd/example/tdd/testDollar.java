@@ -17,13 +17,15 @@ import static org.junit.jupiter.api.Assertions.*;
  * Money의 부작용?->해결
  * Money 반올림?
  * equals -- 해결
- * equals null
- * equals object
- * Dollar/Franc 중복
+ * equals null --해결
+ * equals object --해결
+ * Dollar/Franc 중복 --해결
  * 공용 equal --해결
  * 공용 times --해결
  * Dollar/Franc 비교 --해결
  * 통화 ---해결
+ * SUM.PLUS --해결
+ * EXPRESSION.TIMES --해결
  */
 @SpringBootTest
 public class testDollar {
@@ -82,6 +84,9 @@ public class testDollar {
         assertEquals(Money.dollar(7),result);
     }
 
+    /**
+     * 환율적용
+     */
     @Test
     public void testReduceMoneyDifferentCurrency(){
         Bank bank = new Bank();
@@ -94,4 +99,50 @@ public class testDollar {
     public void testIdentityRate(){
         assertEquals(1,new Bank().rate("USD", "USD"));
     }
+
+    @Test
+    public void testMixedAddition(){
+        Expression fiveBucks = Money.dollar(5);
+        Expression tenFrancs = Money.franc(10);
+
+        Bank bank = new Bank();
+        bank.addRate("CHF", "USD", 2);
+        Money result = bank.reduce(fiveBucks.plus(tenFrancs), "USD");
+        assertEquals(Money.dollar(10), result);
+    }
+
+    /**
+     * sum plus
+     */
+    @Test
+    void testSumPlusTest() {
+        Expression fiveBucks = Money.dollar(5);
+        Expression tenFrancs = Money.franc(10);
+        Bank bank = new Bank();
+        bank.addRate("CHF", "USD", 2);
+        Expression sum = new Sum(fiveBucks, tenFrancs).plus(fiveBucks);
+        Money result = bank.reduce(sum, "USD");
+        assertEquals(Money.dollar(15), result);
+    }
+
+    /**
+     * sum times
+     */
+    @Test
+    void testSumTimes(){
+        Expression fiveBucks = Money.dollar(5);
+        Expression tenFrancs = Money.franc(10);
+        Bank bank = new Bank();
+        bank.addRate("CHF", "USD", 2);
+        Expression sum = new Sum(fiveBucks, tenFrancs).times(2);
+        Money result = bank.reduce(sum, "USD");
+        assertEquals(Money.dollar(20), result);
+    }
+
+    @Test
+    void testPlusSameCurrencyReturnMoney() {
+        Expression sum = Money.dollar(1).plus(Money.dollar(1));
+        assertTrue(sum instanceof Money);
+    }
+
 }

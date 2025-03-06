@@ -30,10 +30,10 @@ public class Money implements Expression {
         int rate = bank.rate(currency, to);
         return new Money(amount/rate, to);
     }
-    public Expression plus(Money addend){
+    public Expression plus(Expression addend){
        return new Sum(this, addend);
     }
-    public Money times(int multiplier) {
+    public Expression times(int multiplier) {
         return new Money(this.amount * multiplier,  currency);
     }
 
