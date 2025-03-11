@@ -1,8 +1,7 @@
-package com.tdd.example.tdd.domain;
+package com.tdd.example.tdd.test1.domain;
 
-import com.tdd.example.tdd.expresion.Expression;
-import com.tdd.example.tdd.expresion.Pair;
-import com.tdd.example.tdd.expresion.Sum;
+import com.tdd.example.tdd.test1.expresion.Pair;
+import com.tdd.example.tdd.test1.expresion.Expression;
 
 import java.util.Hashtable;
 

@@ -1,4 +1,4 @@
-package com.tdd.example.tdd.expresion;
+package com.tdd.example.tdd.test1.expresion;
 
 public class Pair {
     private String from;

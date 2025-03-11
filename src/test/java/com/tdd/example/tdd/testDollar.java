@@ -1,10 +1,10 @@
 package com.tdd.example.tdd;
 
 
-import com.tdd.example.tdd.domain.Bank;
-import com.tdd.example.tdd.domain.Money;
-import com.tdd.example.tdd.expresion.Expression;
-import com.tdd.example.tdd.expresion.Sum;
+import com.tdd.example.tdd.test1.domain.Bank;
+import com.tdd.example.tdd.test1.domain.Money;
+import com.tdd.example.tdd.test1.expresion.Expression;
+import com.tdd.example.tdd.test1.expresion.Sum;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

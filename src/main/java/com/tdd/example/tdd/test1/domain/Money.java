@@ -1,7 +1,7 @@
-package com.tdd.example.tdd.domain;
+package com.tdd.example.tdd.test1.domain;
 
-import com.tdd.example.tdd.expresion.Expression;
-import com.tdd.example.tdd.expresion.Sum;
+import com.tdd.example.tdd.test1.expresion.Sum;
+import com.tdd.example.tdd.test1.expresion.Expression;
 
 public class Money implements Expression {
     public int amount;
