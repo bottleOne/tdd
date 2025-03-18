@@ -11,9 +11,17 @@ public class testWasRun {
     @Test
     void testWasRun() {
 
-        WasRun test = new WasRun();
+        WasRun test = new WasRun("testMethod");
         Assertions.assertEquals(test.wasRun,false);
-        test.testMethod();
+        test.run();
         Assertions.assertEquals(test.wasRun,true);;
+    }
+
+    @Test
+    void testSetup() {
+
+        WasRun test = new WasRun("testMethod");
+        test.run();
+        Assertions.assertEquals(test.wasSetUp,true);;
     }
 }

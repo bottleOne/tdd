@@ -1,20 +1,24 @@
 package com.tdd.example.tdd.test2;
 
-public class WasRun {
+public class WasRun extends TestCase{
 
     public boolean wasRun;
-    public String name;
-    public WasRun(String name){
+
+    public boolean wasSetUp;
+    public WasRun(String name) {
+        super(name);
         this.wasRun = false;
-        this.name = name;
+        this.wasSetUp = false;
+    }
+    public void setUp(){
+        this.wasSetUp = true;
+        this.wasRun = true;
     }
 
     public void testMethod() {
         this.wasRun = true;
     }
 
-    public void run(){
-        testMethod();
-    }
+
 
 }
