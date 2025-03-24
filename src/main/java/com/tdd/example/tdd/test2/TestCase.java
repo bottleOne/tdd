@@ -11,7 +11,6 @@ public abstract class TestCase {
         if(name.equals("testMethod")){
             testMethod();
         }
-
     }
 
     public abstract void testMethod();
