@@ -11,8 +11,11 @@ public abstract class TestCase {
         if(name.equals("testMethod")){
             testMethod();
         }
+        tearDown();
     }
 
     public abstract void testMethod();
     public abstract void setUp();
+
+    public abstract void tearDown();
 }

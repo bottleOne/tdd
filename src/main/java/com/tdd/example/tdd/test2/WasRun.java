@@ -18,8 +18,13 @@ public class WasRun extends TestCase{
     }
 
     public void testMethod() {
-        this.wasRun = true;
-        this.log = this.log + "testMethod";
+        //this.wasRun = true;
+        this.log = this.log + "testMethod ";
+    }
+
+    public void tearDown() {
+        //this.wasRun = true;
+        this.log = this.log + "tearDown ";
     }
 
 

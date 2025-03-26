@@ -35,6 +35,6 @@ public class testWasRun {
     void testTemplateMethod(){
         test = new WasRun("testMethod");
         test.run();
-        Assertions.assertEquals(test.log,"setUp testMethod");
+        Assertions.assertEquals(test.log,"setUp testMethod tearDown ");
     }
 }
