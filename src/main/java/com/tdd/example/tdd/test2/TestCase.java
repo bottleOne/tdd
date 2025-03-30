@@ -6,16 +6,26 @@ public abstract class TestCase {
     public TestCase(String name){
     this.name = name;
 }
-    public void run(){
+    public TestResult run(TestResult result){
+        result.testStarted();
         setUp();
-        if(name.equals("testMethod")){
-            testMethod();
+
+        try {
+            if(name.equals("testMethod")){
+                testMethod();
+            } else if (name.equals("testBrokenMethod")) {
+                testBrokenMethod();
+            }
+        }catch (Exception e){
+            result.testFailed();
         }
+
         tearDown();
+        return result;
     }
 
+    public abstract  void testBrokenMethod();
     public abstract void testMethod();
     public abstract void setUp();
-
     public abstract void tearDown();
 }
